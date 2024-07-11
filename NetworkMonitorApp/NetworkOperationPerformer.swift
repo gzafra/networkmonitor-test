@@ -10,19 +10,20 @@ import Combine
 
 @MainActor
 public class NetworkOperationPerformer {
-    private let networkMonitor: NetworkMonitor
+    private let networkMonitor: any NetworkMonitorProtocol
     private var closure: (() async -> Any)?
     private var cancellable: AnyCancellable?
 
     @MainActor
-    init(networkMonitor: NetworkMonitor = NetworkMonitor()) {
+    init(networkMonitor: any NetworkMonitorProtocol = NetworkMonitor()) {
         self.networkMonitor = networkMonitor
-        self.cancellable = networkMonitor.$isConnected.sink { [weak self] isConnected in
+        self.cancellable = networkMonitor.isConnectedPublisher.sink { [weak self] (isConnected: Bool) in
             if isConnected {
                 Task {
-                    await self?.closure?()
+                    let result = await self?.closure?()
+                    self?.closure = nil
+                    return result
                 }
-                self?.closure = nil
             }
         }
     }

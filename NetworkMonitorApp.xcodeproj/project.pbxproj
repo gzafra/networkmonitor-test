@@ -13,7 +13,19 @@
 		B6E18B6C2C3FCD84004960AD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6E18B6B2C3FCD84004960AD /* Preview Assets.xcassets */; };
 		B6E18B732C3FCD8D004960AD /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E18B722C3FCD8D004960AD /* NetworkMonitor.swift */; };
 		B6E18B752C3FCE0A004960AD /* NetworkOperationPerformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E18B742C3FCE0A004960AD /* NetworkOperationPerformer.swift */; };
+		B6E18B7D2C3FEDB9004960AD /* NetworkOperationPerformerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E18B7C2C3FEDB9004960AD /* NetworkOperationPerformerTests.swift */; };
+		B6E18B852C3FEDD1004960AD /* MockNetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E18B842C3FEDD1004960AD /* MockNetworkMonitor.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B6E18B7E2C3FEDB9004960AD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B6E18B592C3FCD80004960AD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B6E18B602C3FCD80004960AD;
+			remoteInfo = NetworkMonitorApp;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		B6E18B612C3FCD80004960AD /* NetworkMonitorApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NetworkMonitorApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -23,10 +35,20 @@
 		B6E18B6B2C3FCD84004960AD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B6E18B722C3FCD8D004960AD /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		B6E18B742C3FCE0A004960AD /* NetworkOperationPerformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkOperationPerformer.swift; sourceTree = "<group>"; };
+		B6E18B7A2C3FEDB9004960AD /* NetworkMonitorAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NetworkMonitorAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B6E18B7C2C3FEDB9004960AD /* NetworkOperationPerformerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkOperationPerformerTests.swift; sourceTree = "<group>"; };
+		B6E18B842C3FEDD1004960AD /* MockNetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkMonitor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		B6E18B5E2C3FCD80004960AD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B6E18B772C3FEDB9004960AD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -40,6 +62,7 @@
 			isa = PBXGroup;
 			children = (
 				B6E18B632C3FCD80004960AD /* NetworkMonitorApp */,
+				B6E18B7B2C3FEDB9004960AD /* NetworkMonitorAppTests */,
 				B6E18B622C3FCD80004960AD /* Products */,
 			);
 			sourceTree = "<group>";
@@ -48,6 +71,7 @@
 			isa = PBXGroup;
 			children = (
 				B6E18B612C3FCD80004960AD /* NetworkMonitorApp.app */,
+				B6E18B7A2C3FEDB9004960AD /* NetworkMonitorAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -73,6 +97,23 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		B6E18B7B2C3FEDB9004960AD /* NetworkMonitorAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				B6E18B832C3FEDC0004960AD /* Mocks */,
+				B6E18B7C2C3FEDB9004960AD /* NetworkOperationPerformerTests.swift */,
+			);
+			path = NetworkMonitorAppTests;
+			sourceTree = "<group>";
+		};
+		B6E18B832C3FEDC0004960AD /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				B6E18B842C3FEDD1004960AD /* MockNetworkMonitor.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -93,6 +134,24 @@
 			productReference = B6E18B612C3FCD80004960AD /* NetworkMonitorApp.app */;
 			productType = "com.apple.product-type.application";
 		};
+		B6E18B792C3FEDB9004960AD /* NetworkMonitorAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B6E18B802C3FEDB9004960AD /* Build configuration list for PBXNativeTarget "NetworkMonitorAppTests" */;
+			buildPhases = (
+				B6E18B762C3FEDB9004960AD /* Sources */,
+				B6E18B772C3FEDB9004960AD /* Frameworks */,
+				B6E18B782C3FEDB9004960AD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B6E18B7F2C3FEDB9004960AD /* PBXTargetDependency */,
+			);
+			name = NetworkMonitorAppTests;
+			productName = NetworkMonitorAppTests;
+			productReference = B6E18B7A2C3FEDB9004960AD /* NetworkMonitorAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -105,6 +164,10 @@
 				TargetAttributes = {
 					B6E18B602C3FCD80004960AD = {
 						CreatedOnToolsVersion = 15.4;
+					};
+					B6E18B792C3FEDB9004960AD = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = B6E18B602C3FCD80004960AD;
 					};
 				};
 			};
@@ -122,6 +185,7 @@
 			projectRoot = "";
 			targets = (
 				B6E18B602C3FCD80004960AD /* NetworkMonitorApp */,
+				B6E18B792C3FEDB9004960AD /* NetworkMonitorAppTests */,
 			);
 		};
 /* End PBXProject section */
@@ -133,6 +197,13 @@
 			files = (
 				B6E18B6C2C3FCD84004960AD /* Preview Assets.xcassets in Resources */,
 				B6E18B692C3FCD84004960AD /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B6E18B782C3FEDB9004960AD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,7 +221,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B6E18B762C3FEDB9004960AD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B6E18B7D2C3FEDB9004960AD /* NetworkOperationPerformerTests.swift in Sources */,
+				B6E18B852C3FEDD1004960AD /* MockNetworkMonitor.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B6E18B7F2C3FEDB9004960AD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B6E18B602C3FCD80004960AD /* NetworkMonitorApp */;
+			targetProxy = B6E18B7E2C3FEDB9004960AD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		B6E18B6D2C3FCD84004960AD /* Debug */ = {
@@ -328,6 +416,40 @@
 			};
 			name = Release;
 		};
+		B6E18B812C3FEDB9004960AD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gzafra.NetworkMonitorAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NetworkMonitorApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/NetworkMonitorApp";
+			};
+			name = Debug;
+		};
+		B6E18B822C3FEDB9004960AD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gzafra.NetworkMonitorAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NetworkMonitorApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/NetworkMonitorApp";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -345,6 +467,15 @@
 			buildConfigurations = (
 				B6E18B702C3FCD84004960AD /* Debug */,
 				B6E18B712C3FCD84004960AD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B6E18B802C3FEDB9004960AD /* Build configuration list for PBXNativeTarget "NetworkMonitorAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B6E18B812C3FEDB9004960AD /* Debug */,
+				B6E18B822C3FEDB9004960AD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
