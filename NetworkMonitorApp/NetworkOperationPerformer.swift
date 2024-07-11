@@ -11,7 +11,6 @@ import Combine
 @MainActor
 public class NetworkOperationPerformer {
     private let networkMonitor: NetworkMonitor
-//    private var timer: Timer?
     private var closure: (() async -> Any)?
     private var cancellable: AnyCancellable?
 
@@ -24,8 +23,6 @@ public class NetworkOperationPerformer {
                     await self?.closure?()
                 }
                 self?.closure = nil
-//                self?.timer?.invalidate()
-//                self?.timer = nil
             }
         }
     }
@@ -53,14 +50,4 @@ public class NetworkOperationPerformer {
         try? await Task.sleep(nanoseconds: nanoseconds)
         self.closure = nil
     }
-    
-
 }
-
-
-//    private func setTimeout(after timeoutDuration: TimeInterval) {
-//        self.timer = Timer.scheduledTimer(withTimeInterval: timeoutDuration, repeats: false) { [weak self] _ in
-//            self?.closure = nil
-//            self?.timer = nil
-//        }
-//    }
