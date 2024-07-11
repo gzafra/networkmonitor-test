@@ -11,6 +11,8 @@
 		B6E18B672C3FCD80004960AD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E18B662C3FCD80004960AD /* ContentView.swift */; };
 		B6E18B692C3FCD84004960AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6E18B682C3FCD84004960AD /* Assets.xcassets */; };
 		B6E18B6C2C3FCD84004960AD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6E18B6B2C3FCD84004960AD /* Preview Assets.xcassets */; };
+		B6E18B732C3FCD8D004960AD /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E18B722C3FCD8D004960AD /* NetworkMonitor.swift */; };
+		B6E18B752C3FCE0A004960AD /* NetworkOperationPerformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E18B742C3FCE0A004960AD /* NetworkOperationPerformer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +21,8 @@
 		B6E18B662C3FCD80004960AD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B6E18B682C3FCD84004960AD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B6E18B6B2C3FCD84004960AD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		B6E18B722C3FCD8D004960AD /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
+		B6E18B742C3FCE0A004960AD /* NetworkOperationPerformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkOperationPerformer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +59,8 @@
 				B6E18B662C3FCD80004960AD /* ContentView.swift */,
 				B6E18B682C3FCD84004960AD /* Assets.xcassets */,
 				B6E18B6A2C3FCD84004960AD /* Preview Content */,
+				B6E18B722C3FCD8D004960AD /* NetworkMonitor.swift */,
+				B6E18B742C3FCE0A004960AD /* NetworkOperationPerformer.swift */,
 			);
 			path = NetworkMonitorApp;
 			sourceTree = "<group>";
@@ -138,7 +144,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6E18B672C3FCD80004960AD /* ContentView.swift in Sources */,
+				B6E18B732C3FCD8D004960AD /* NetworkMonitor.swift in Sources */,
 				B6E18B652C3FCD80004960AD /* NetworkMonitorAppApp.swift in Sources */,
+				B6E18B752C3FCE0A004960AD /* NetworkOperationPerformer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
