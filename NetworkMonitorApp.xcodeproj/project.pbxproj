@@ -20,6 +20,11 @@
 		B6E18B912C4132D4004960AD /* ResultScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E18B902C4132D4004960AD /* ResultScreen.swift */; };
 		B6E18B942C4135FE004960AD /* ImageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E18B932C4135FE004960AD /* ImageRequest.swift */; };
 		B6E18B972C41416C004960AD /* MockNetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E18B962C41416C004960AD /* MockNetworkMonitor.swift */; };
+		B6E18B9C2C415C21004960AD /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = B6E18B9B2C415C21004960AD /* ComposableArchitecture */; };
+		B6E18BA02C415E4E004960AD /* LoadImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E18B9F2C415E4E004960AD /* LoadImageView.swift */; };
+		B6E18BA22C415E68004960AD /* LoadImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E18BA12C415E68004960AD /* LoadImage.swift */; };
+		B6E18BA42C416001004960AD /* NetworkState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E18BA32C416001004960AD /* NetworkState.swift */; };
+		B6E18BA62C416564004960AD /* LoadImage+Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E18BA52C416564004960AD /* LoadImage+Mocks.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +53,10 @@
 		B6E18B902C4132D4004960AD /* ResultScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultScreen.swift; sourceTree = "<group>"; };
 		B6E18B932C4135FE004960AD /* ImageRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRequest.swift; sourceTree = "<group>"; };
 		B6E18B962C41416C004960AD /* MockNetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkMonitor.swift; sourceTree = "<group>"; };
+		B6E18B9F2C415E4E004960AD /* LoadImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadImageView.swift; sourceTree = "<group>"; };
+		B6E18BA12C415E68004960AD /* LoadImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadImage.swift; sourceTree = "<group>"; };
+		B6E18BA32C416001004960AD /* NetworkState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkState.swift; sourceTree = "<group>"; };
+		B6E18BA52C416564004960AD /* LoadImage+Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoadImage+Mocks.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6E18B9C2C415C21004960AD /* ComposableArchitecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,6 +99,7 @@
 		B6E18B632C3FCD80004960AD /* NetworkMonitorApp */ = {
 			isa = PBXGroup;
 			children = (
+				B6E18B9D2C415E23004960AD /* Features */,
 				B6E18B952C41415E004960AD /* Mocks */,
 				B6E18B922C4135F4004960AD /* Data */,
 				B6E18B892C413212004960AD /* Flows */,
@@ -153,6 +164,25 @@
 			path = Mocks;
 			sourceTree = "<group>";
 		};
+		B6E18B9D2C415E23004960AD /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				B6E18B9E2C415E2B004960AD /* LoadImageView */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		B6E18B9E2C415E2B004960AD /* LoadImageView */ = {
+			isa = PBXGroup;
+			children = (
+				B6E18BA32C416001004960AD /* NetworkState.swift */,
+				B6E18B9F2C415E4E004960AD /* LoadImageView.swift */,
+				B6E18BA12C415E68004960AD /* LoadImage.swift */,
+				B6E18BA52C416564004960AD /* LoadImage+Mocks.swift */,
+			);
+			path = LoadImageView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -169,6 +199,9 @@
 			dependencies = (
 			);
 			name = NetworkMonitorApp;
+			packageProductDependencies = (
+				B6E18B9B2C415C21004960AD /* ComposableArchitecture */,
+			);
 			productName = NetworkMonitorApp;
 			productReference = B6E18B612C3FCD80004960AD /* NetworkMonitorApp.app */;
 			productType = "com.apple.product-type.application";
@@ -219,6 +252,9 @@
 				Base,
 			);
 			mainGroup = B6E18B582C3FCD80004960AD;
+			packageReferences = (
+				B6E18B9A2C415C21004960AD /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+			);
 			productRefGroup = B6E18B622C3FCD80004960AD /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -253,14 +289,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6E18BA42C416001004960AD /* NetworkState.swift in Sources */,
 				B6E18B672C3FCD80004960AD /* ContentView.swift in Sources */,
 				B6E18B732C3FCD8D004960AD /* NetworkMonitor.swift in Sources */,
+				B6E18BA02C415E4E004960AD /* LoadImageView.swift in Sources */,
 				B6E18B8D2C4132AF004960AD /* LoadingScreen.swift in Sources */,
 				B6E18B8B2C413225004960AD /* MainFlow.swift in Sources */,
 				B6E18B912C4132D4004960AD /* ResultScreen.swift in Sources */,
 				B6E18B652C3FCD80004960AD /* NetworkMonitorAppApp.swift in Sources */,
 				B6E18B752C3FCE0A004960AD /* NetworkOperationPerformer.swift in Sources */,
+				B6E18BA62C416564004960AD /* LoadImage+Mocks.swift in Sources */,
 				B6E18B942C4135FE004960AD /* ImageRequest.swift in Sources */,
+				B6E18BA22C415E68004960AD /* LoadImage.swift in Sources */,
 				B6E18B8F2C4132C0004960AD /* ErrorScreen.swift in Sources */,
 				B6E18B972C41416C004960AD /* MockNetworkMonitor.swift in Sources */,
 			);
@@ -525,6 +565,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B6E18B9A2C415C21004960AD /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.11.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B6E18B9B2C415C21004960AD /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B6E18B9A2C415C21004960AD /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B6E18B592C3FCD80004960AD /* Project object */;
 }

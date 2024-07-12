@@ -11,7 +11,13 @@ import SwiftUI
 struct NetworkMonitorAppApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            LoadImageView(
+                store: .init(
+                    initialState: .init(networkState: .ready)
+                ) {
+                    LoadImage()
+                }
+            )
         }
     }
 }
