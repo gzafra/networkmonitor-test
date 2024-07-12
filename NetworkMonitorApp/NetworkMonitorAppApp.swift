@@ -15,7 +15,7 @@ struct NetworkMonitorAppApp: App {
                 store: .init(
                     initialState: .init(networkState: .ready)
                 ) {
-                    LoadImage()
+                    LoadImageReducer()
                 }
             )
         }

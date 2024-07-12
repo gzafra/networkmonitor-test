@@ -11,12 +11,9 @@ import SwiftUI
 
 #if DEBUG
 
-
-extension LoadImage.State {
+extension LoadImageReducer.State {
   static let loading = Self(networkState: .loading)
-
   static let success = Self(networkState: .completed(.success(.mock)))
-
   static let failure = Self(networkState: .completed(.failure(.cannotLoadImage(error: "error"))))
 }
 

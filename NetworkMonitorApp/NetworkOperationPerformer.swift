@@ -8,7 +8,6 @@
 import Foundation
 import Combine
 
-@MainActor
 public class NetworkOperationPerformer<SomeType> {
     private let networkMonitor: any NetworkMonitorProtocol
     private var closure: (() async -> SomeType)?
@@ -16,7 +15,6 @@ public class NetworkOperationPerformer<SomeType> {
     private var task: Task<SomeType, Never>?
     private var timeoutTask: Task<Void, Never>?
     
-    @MainActor
     init(networkMonitor: any NetworkMonitorProtocol = NetworkMonitor()) {
         self.networkMonitor = networkMonitor
         self.cancellable = networkMonitor.isConnectedPublisher.sink { [weak self] (isConnected: Bool) in

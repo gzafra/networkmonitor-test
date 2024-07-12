@@ -22,7 +22,7 @@
 		B6E18B972C41416C004960AD /* MockNetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E18B962C41416C004960AD /* MockNetworkMonitor.swift */; };
 		B6E18B9C2C415C21004960AD /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = B6E18B9B2C415C21004960AD /* ComposableArchitecture */; };
 		B6E18BA02C415E4E004960AD /* LoadImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E18B9F2C415E4E004960AD /* LoadImageView.swift */; };
-		B6E18BA22C415E68004960AD /* LoadImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E18BA12C415E68004960AD /* LoadImage.swift */; };
+		B6E18BA22C415E68004960AD /* LoadImageReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E18BA12C415E68004960AD /* LoadImageReducer.swift */; };
 		B6E18BA42C416001004960AD /* NetworkState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E18BA32C416001004960AD /* NetworkState.swift */; };
 		B6E18BA62C416564004960AD /* LoadImage+Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E18BA52C416564004960AD /* LoadImage+Mocks.swift */; };
 /* End PBXBuildFile section */
@@ -54,7 +54,7 @@
 		B6E18B932C4135FE004960AD /* ImageRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRequest.swift; sourceTree = "<group>"; };
 		B6E18B962C41416C004960AD /* MockNetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkMonitor.swift; sourceTree = "<group>"; };
 		B6E18B9F2C415E4E004960AD /* LoadImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadImageView.swift; sourceTree = "<group>"; };
-		B6E18BA12C415E68004960AD /* LoadImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadImage.swift; sourceTree = "<group>"; };
+		B6E18BA12C415E68004960AD /* LoadImageReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadImageReducer.swift; sourceTree = "<group>"; };
 		B6E18BA32C416001004960AD /* NetworkState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkState.swift; sourceTree = "<group>"; };
 		B6E18BA52C416564004960AD /* LoadImage+Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoadImage+Mocks.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -177,7 +177,7 @@
 			children = (
 				B6E18BA32C416001004960AD /* NetworkState.swift */,
 				B6E18B9F2C415E4E004960AD /* LoadImageView.swift */,
-				B6E18BA12C415E68004960AD /* LoadImage.swift */,
+				B6E18BA12C415E68004960AD /* LoadImageReducer.swift */,
 				B6E18BA52C416564004960AD /* LoadImage+Mocks.swift */,
 			);
 			path = LoadImageView;
@@ -300,7 +300,7 @@
 				B6E18B752C3FCE0A004960AD /* NetworkOperationPerformer.swift in Sources */,
 				B6E18BA62C416564004960AD /* LoadImage+Mocks.swift in Sources */,
 				B6E18B942C4135FE004960AD /* ImageRequest.swift in Sources */,
-				B6E18BA22C415E68004960AD /* LoadImage.swift in Sources */,
+				B6E18BA22C415E68004960AD /* LoadImageReducer.swift in Sources */,
 				B6E18B8F2C4132C0004960AD /* ErrorScreen.swift in Sources */,
 				B6E18B972C41416C004960AD /* MockNetworkMonitor.swift in Sources */,
 			);

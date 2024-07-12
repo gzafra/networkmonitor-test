@@ -11,9 +11,9 @@ import SwiftUI
 struct LoadImageView: View {
     @Environment(\.colorScheme) var colorScheme
     
-    private var store: Store<LoadImage.State, LoadImage.Action>
+    private var store: Store<LoadImageReducer.State, LoadImageReducer.Action>
     
-    public init(store: Store<LoadImage.State, LoadImage.Action>) {
+    public init(store: Store<LoadImageReducer.State, LoadImageReducer.Action>) {
         self.store = store
     }
     
@@ -25,7 +25,7 @@ struct LoadImageView: View {
                 loadingIndicator(isConnected: true)
             case let .completed(.success(astronomyPictures)):
                 success(with: astronomyPictures)
-            case let .completed(.failure(error)):
+            case .completed(.failure):
                 VStack {
                     Text(Strings.errorMessage)
                 }
@@ -93,7 +93,7 @@ extension LoadImageView {
 
 struct LoadImageView_Preview {
     struct Preview: View {
-        var store: Store<LoadImage.State, LoadImage.Action>
+        var store: Store<LoadImageReducer.State, LoadImageReducer.Action>
         var body: some View {
             LoadImageView(store: store)
         }
@@ -101,28 +101,28 @@ struct LoadImageView_Preview {
 }
 
 #Preview {
-    let store: Store<LoadImage.State, LoadImage.Action> = .init(
+    let store: Store<LoadImageReducer.State, LoadImageReducer.Action> = .init(
         initialState: .success
     ) {
-        LoadImage()
+        LoadImageReducer()
     }
     return LoadImageView(store: store)
 }
 
 #Preview {
-    let store: Store<LoadImage.State, LoadImage.Action> = .init(
+    let store: Store<LoadImageReducer.State, LoadImageReducer.Action> = .init(
         initialState: .loading
     ) {
-        LoadImage()
+        LoadImageReducer()
     }
     return LoadImageView(store: store)
 }
 
 #Preview {
-    let store: Store<LoadImage.State, LoadImage.Action> = .init(
+    let store: Store<LoadImageReducer.State, LoadImageReducer.Action> = .init(
         initialState: .failure
     ) {
-        LoadImage()
+        LoadImageReducer()
     }
     return LoadImageView(store: store)
 }

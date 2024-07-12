@@ -22,27 +22,27 @@ public struct LoadedImage: Equatable, Identifiable, Hashable {
     let image: Image
 }
 
-
 public struct LoadImageReducer: Reducer {
     private enum Constants {
         static let imageUrl = "https://fastly.picsum.photos/id/4/5000/3333.jpg?hmac=ghf06FdmgiD0-G4c9DdNM8RnBIN7BO0-ZGEw47khHP4"
     }
     
     public struct State: Equatable {
-        public var networkState: NetworkState<LoadedImage, LoadImageReducer.Error>
+        public var networkState: NetworkState<LoadedImage, LoadImageReducer.ReducerError>
         
-        public init(networkState: NetworkState<LoadedImage, LoadImageReducer.Error>) {
+        public init(networkState: NetworkState<LoadedImage, LoadImageReducer.ReducerError>) {
             self.networkState = networkState
         }
     }
     
     public enum Action: Equatable {
         case didReceiveImage(LoadedImage)
-        case didReceiveError(Error)
+        case didReceiveError(ReducerError)
         case onAppear
     }
     
-    private let imageRequest = ImageRequest()
+    private let operationPerformer = NetworkOperationPerformer<Result<Image, Error>>()
+    private let imageTask = ImageRequest()
     
     public var body: some Reducer<State, Action> {
         Reduce { state, action in
@@ -70,24 +70,32 @@ public struct LoadImageReducer: Reducer {
 extension LoadImageReducer {
     fileprivate func loadEffect() -> Effect<LoadImageReducer.Action> {
         return .run { send in
-            let result = await imageRequest.getImageFrom(urlString: Constants.imageUrl)
+            let result = await fetchImage()
+
             switch result {
             case .success(let image):
                 let loadedImage = LoadedImage(image: image)
                 return await send(.didReceiveImage(loadedImage))
-            case .failure(let error):
-                return await send(.didReceiveError(.cannotLoadImage(error: error.localizedDescription)))
+            case .failure(let error): // TODO: Handle error?
+                return await send(.didReceiveError(ReducerError.cannotLoadImage(error: error.localizedDescription)))
             }
         } catch: { error, send in
-            return await send(.didReceiveError(.cannotLoadImage(error: error.localizedDescription)))
+            return await send(.didReceiveError(ReducerError.cannotLoadImage(error: error.localizedDescription)))
         }
+    }
+    
+    private func fetchImage() async -> Result<Image, Error> {
+        let result: Result<Image, Error>? = await operationPerformer.perform(withinSeconds: 3) {
+            return await self.imageTask.getImageFrom(urlString: Constants.imageUrl)
+        }
+        return result ?? .failure(ReducerError.cannotLoadImage(error: "Generic Error"))
     }
 }
 
 // MARK: Errors
 
 extension LoadImageReducer {
-    public enum Error: Swift.Error, Equatable {
+    public enum ReducerError: Error, Equatable {
         case cannotLoadImage(error: String)
     }
 }
