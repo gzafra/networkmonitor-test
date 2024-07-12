@@ -1,13 +1,12 @@
 //
 //  MockNetworkMonitor.swift
-//  NetworkMonitorAppTests
+//  NetworkMonitorApp
 //
-//  Created by Guillermo Zafra on 11/7/24.
+//  Created by Guillermo Zafra on 12/7/24.
 //
 
 import Foundation
 import Combine
-@testable import NetworkMonitorApp
 
 class MockNetworkMonitor: NetworkMonitorProtocol {
     @Published var isConnected: Bool
