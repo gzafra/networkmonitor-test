@@ -9,19 +9,23 @@ import Foundation
 import Combine
 
 @MainActor
-public class NetworkOperationPerformer {
+public class NetworkOperationPerformer<SomeType> {
     private let networkMonitor: any NetworkMonitorProtocol
-    private var closure: (() async -> Any)?
+    private var closure: (() async -> SomeType)?
     private var cancellable: AnyCancellable?
-
+    private var task: Task<SomeType, Never>?
+    private var timeoutTask: Task<Void, Never>?
+    
     @MainActor
     init(networkMonitor: any NetworkMonitorProtocol = NetworkMonitor()) {
         self.networkMonitor = networkMonitor
         self.cancellable = networkMonitor.isConnectedPublisher.sink { [weak self] (isConnected: Bool) in
             if isConnected {
-                Task {
-                    let result = await self?.closure?()
-                    self?.closure = nil
+                guard let self, let closure = self.closure else { return }
+                print("Becomes connected")
+                self.timeoutTask?.cancel()
+                self.task = Task {
+                    let result = await closure()
                     return result
                 }
             }
@@ -33,22 +37,39 @@ public class NetworkOperationPerformer {
     }
 
     @MainActor
-    public func perform<SomeType>(
+    public func perform(
         withinSeconds timeoutDuration: TimeInterval,
         using closure: @escaping @Sendable () async -> SomeType
     ) async -> SomeType? {
         self.closure = closure
         if self.networkMonitor.isConnected {
-            return await closure()
+            print("Initially connected")
+            self.task = Task {
+                let result = await closure()
+                return result
+            }
         } else {
+            print("Initially not connected")
             await setTimeout(after: timeoutDuration)
-            return nil
         }
+        print("Actually executing task")
+        return await self.task?.value
     }
     
+    @MainActor
     private func setTimeout(after timeoutDuration: TimeInterval) async {
-        let nanoseconds = UInt64(timeoutDuration * 1_000_000_000) // convert seconds to nanoseconds
-        try? await Task.sleep(nanoseconds: nanoseconds)
-        self.closure = nil
+        let nanoseconds = UInt64(timeoutDuration * 1_000_000_000)
+        self.timeoutTask = Task {
+            print("Started timing out")
+            try? await Task.sleep(nanoseconds: nanoseconds)
+            print("Timed out")
+        }
+        await self.timeoutTask?.value        
+    }
+    
+    public func cancel() {
+        print("Task cancelled")
+        timeoutTask?.cancel()
+        task?.cancel()
     }
 }

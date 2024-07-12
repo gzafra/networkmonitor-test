@@ -16,15 +16,16 @@ struct ContentView: View {
             Text("Hello, world!")
         }
         .padding()
-        .task {
-            let networkOperationClosure: () async -> Bool = {
-                // Long-lasting network operation.
-                return true
-            }
-            let _: Bool? = await NetworkOperationPerformer().perform(withinSeconds: 3) {
-                return await networkOperationClosure()
-            }
-        }
+//        .task {
+//            let networkOperationClosure: () async -> String = {
+//                // Long-lasting network operation.
+//                return "Hello world"
+//            }
+//            let result: String? = await NetworkOperationPerformer().perform(withinSeconds: 3) {
+//                return await networkOperationClosure()
+//            }
+//            print(result ?? "No value")
+//        }
     }
 }
 
