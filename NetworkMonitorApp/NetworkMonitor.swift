@@ -8,6 +8,7 @@
 import Network
 import Foundation
 import Combine
+import ComposableArchitecture
 
 public protocol NetworkMonitorProtocol: ObservableObject {
     var isConnected: Bool { get }
@@ -27,10 +28,6 @@ class NetworkMonitor: NetworkMonitorProtocol {
     init() {
         monitor.pathUpdateHandler = { path in
             self.isConnected = path.status == .satisfied
-           
-            DispatchQueue.main.async {
-                self.objectWillChange.send()
-            }
         }
         
         monitor.start(queue: queue)

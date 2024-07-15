@@ -22,7 +22,7 @@ struct LoadImageView: View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             switch viewStore.networkState {
             case .loading:
-                loadingIndicator(isConnected: true)
+                loadingIndicator(isConnected: viewStore.isInternetConnected)
             case let .completed(.success(astronomyPictures)):
                 success(with: astronomyPictures)
             case .completed(.failure):

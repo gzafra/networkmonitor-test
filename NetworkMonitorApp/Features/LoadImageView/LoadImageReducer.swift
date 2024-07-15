@@ -8,6 +8,7 @@
 import ComposableArchitecture
 import Foundation
 import SwiftUI
+import Combine
 
 public struct LoadedImage: Equatable, Identifiable, Hashable {
     public static func == (lhs: LoadedImage, rhs: LoadedImage) -> Bool {
@@ -22,13 +23,14 @@ public struct LoadedImage: Equatable, Identifiable, Hashable {
     let image: Image
 }
 
-public struct LoadImageReducer: Reducer {
+public class LoadImageReducer: Reducer {
     private enum Constants {
         static let imageUrl = "https://fastly.picsum.photos/id/4/5000/3333.jpg?hmac=ghf06FdmgiD0-G4c9DdNM8RnBIN7BO0-ZGEw47khHP4"
     }
     
     public struct State: Equatable {
         public var networkState: NetworkState<LoadedImage, LoadImageReducer.ReducerError>
+        public var isInternetConnected: Bool = true
         
         public init(networkState: NetworkState<LoadedImage, LoadImageReducer.ReducerError>) {
             self.networkState = networkState
@@ -39,10 +41,13 @@ public struct LoadImageReducer: Reducer {
         case didReceiveImage(LoadedImage)
         case didReceiveError(ReducerError)
         case onAppear
+        case internetStatusChanged(Bool)
     }
     
     private let operationPerformer = NetworkOperationPerformer<Result<Image, Error>>()
     private let imageTask = ImageRequest()
+    private let networkMonitor = MockNetworkMonitor(initiallyConnected: true, becomesConnected: false, after: 1) // Mock just for testing purposes
+    private var cancellables = Set<AnyCancellable>()
     
     public var body: some Reducer<State, Action> {
         Reduce { state, action in
@@ -61,7 +66,11 @@ public struct LoadImageReducer: Reducer {
                 }
                 
                 state.networkState = .loading
-                return self.loadEffect()
+                return .merge(self.loadEffect(), self.monitorConnectionEfect())
+                
+            case let .internetStatusChanged(isConnected):
+                state.isInternetConnected = isConnected
+                return .none
             }
         }
     }
@@ -70,7 +79,7 @@ public struct LoadImageReducer: Reducer {
 extension LoadImageReducer {
     fileprivate func loadEffect() -> Effect<LoadImageReducer.Action> {
         return .run { send in
-            let result = await fetchImage()
+            let result = await self.fetchImage()
 
             switch result {
             case .success(let image):
@@ -81,6 +90,17 @@ extension LoadImageReducer {
             }
         } catch: { error, send in
             return await send(.didReceiveError(ReducerError.cannotLoadImage(error: error.localizedDescription)))
+        }
+    }
+    
+    fileprivate func monitorConnectionEfect() -> Effect<LoadImageReducer.Action> {
+        return Effect.run { send in
+            return self.networkMonitor.isConnectedPublisher.sink { isConnected in
+                Task {
+                    await send(.internetStatusChanged(isConnected))
+                }
+            }
+            .store(in: &self.cancellables)
         }
     }
     
