@@ -99,6 +99,7 @@
 		B6E18B632C3FCD80004960AD /* NetworkMonitorApp */ = {
 			isa = PBXGroup;
 			children = (
+				B6E18BA92C44F9EA004960AD /* Common */,
 				B6E18B9D2C415E23004960AD /* Features */,
 				B6E18B952C41415E004960AD /* Mocks */,
 				B6E18B922C4135F4004960AD /* Data */,
@@ -107,8 +108,6 @@
 				B6E18B642C3FCD80004960AD /* NetworkMonitorAppApp.swift */,
 				B6E18B682C3FCD84004960AD /* Assets.xcassets */,
 				B6E18B6A2C3FCD84004960AD /* Preview Content */,
-				B6E18B722C3FCD8D004960AD /* NetworkMonitor.swift */,
-				B6E18B742C3FCE0A004960AD /* NetworkOperationPerformer.swift */,
 			);
 			path = NetworkMonitorApp;
 			sourceTree = "<group>";
@@ -181,6 +180,23 @@
 				B6E18BA52C416564004960AD /* LoadImage+Mocks.swift */,
 			);
 			path = LoadImageView;
+			sourceTree = "<group>";
+		};
+		B6E18BA92C44F9EA004960AD /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				B6E18BAA2C44F9EF004960AD /* Network */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		B6E18BAA2C44F9EF004960AD /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				B6E18B722C3FCD8D004960AD /* NetworkMonitor.swift */,
+				B6E18B742C3FCE0A004960AD /* NetworkOperationPerformer.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
