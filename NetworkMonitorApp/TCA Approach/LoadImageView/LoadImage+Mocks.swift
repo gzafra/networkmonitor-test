@@ -18,7 +18,7 @@ extension LoadImageReducer.State {
 }
 
 extension LoadedImage {
-    static let mock = Self(image: Image("image"))
+    static let mock = Self(id: "ID", imageData: Data())
 }
 
 #endif

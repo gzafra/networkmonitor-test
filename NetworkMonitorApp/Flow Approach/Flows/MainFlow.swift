@@ -22,7 +22,7 @@ class Flow: ObservableObject {
     }
     @Published var state: FlowState = .loading(isConnected: true)
     @Published var image: Image? = nil
-    private let operationPerformer = NetworkOperationPerformer<Result<Image, Error>?>()
+    private let operationPerformer = NetworkOperationPerformer<Result<ImageDataModel, Error>?>()
     private let imageTask = ImageRequest()
     private let networkMonitor = MockNetworkMonitor(initiallyConnected: true, becomesConnected: false, after: 1) // Mock just for testing purposes
     private var cancellables = Set<AnyCancellable>()
@@ -42,8 +42,8 @@ class Flow: ObservableObject {
                 return await self?.imageTask.getImageFrom(urlString: Constants.imageUrl)
             }
             switch result {
-            case .success(let image):
-                self.image = image
+            case .success(let model):
+                self.image = Image(data: model.data)
                 state = .loaded
             case .failure: // TODO: Handle error?
                 state = .error

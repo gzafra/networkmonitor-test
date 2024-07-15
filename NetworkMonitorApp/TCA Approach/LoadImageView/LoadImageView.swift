@@ -23,13 +23,10 @@ struct LoadImageView: View {
             switch viewStore.networkState {
             case .loading:
                 loadingIndicator(isConnected: viewStore.isInternetConnected)
-            case let .completed(.success(astronomyPictures)):
-                success(with: astronomyPictures)
+            case let .completed(.success(loadedImage)):
+                successScreen(with: loadedImage)
             case .completed(.failure):
-                VStack {
-                    Text(Strings.errorMessage)
-                }
-                .background(colorScheme == .dark ? Color.black : Color.white)
+                errorScreen()
             case .ready:
                 Color.clear
             }
@@ -44,21 +41,8 @@ struct LoadImageView: View {
                 }
         }
     }
-}
-
-// MARK: - Constants
-
-extension LoadImageView {
-    enum Strings {
-        static let noConnection = "No Connection"
-        static let errorMessage = "Image could not be loaded"
-    }
-}
-
-// MARK: - States & helpers
-
-extension LoadImageView {
-    fileprivate func loadingIndicator(isConnected: Bool) -> some View {
+    
+    private func loadingIndicator(isConnected: Bool) -> some View {
         ZStack(alignment: .top) {
             VStack(spacing: 24) {
                 Spacer()
@@ -73,17 +57,24 @@ extension LoadImageView {
         }
     }
     
-    fileprivate func success(with loadedImage: LoadedImage) -> some View {
-        ZStack(alignment: .top) {
-            // Scrollable content
-            loadedImage.image
-                .resizable()
-                .scaledToFit()
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .padding()
-                .background(colorScheme == .dark ? Color.black : Color.white)
+    private func successScreen(with loadedImage: LoadedImage) -> some View {
+        ResultScreen(image: Image(data: loadedImage.imageData))
+    }
+    
+    private func errorScreen() -> some View {
+        VStack {
+            Text(Strings.errorMessage)
         }
-        .foregroundColor(colorScheme == .dark ? .white : .black)
+        .background(colorScheme == .dark ? Color.black : Color.white)
+    }
+}
+
+// MARK: - Constants
+
+extension LoadImageView {
+    enum Strings {
+        static let noConnection = "No Connection"
+        static let errorMessage = "Image could not be loaded"
     }
 }
 
@@ -104,7 +95,10 @@ struct LoadImageView_Preview {
     let store: Store<LoadImageReducer.State, LoadImageReducer.Action> = .init(
         initialState: .success
     ) {
-        LoadImageReducer()
+        LoadImageReducer(
+            networkMonitor: MockNetworkMonitor(initiallyConnected: true, becomesConnected: false, after: 1),
+            fetchImageUseCase: MockFetchImageUseCase()
+        )
     }
     return LoadImageView(store: store)
 }
@@ -113,7 +107,10 @@ struct LoadImageView_Preview {
     let store: Store<LoadImageReducer.State, LoadImageReducer.Action> = .init(
         initialState: .loading
     ) {
-        LoadImageReducer()
+        LoadImageReducer(
+            networkMonitor: MockNetworkMonitor(initiallyConnected: true, becomesConnected: false, after: 1),
+            fetchImageUseCase: MockFetchImageUseCase()
+        )
     }
     return LoadImageView(store: store)
 }
@@ -122,7 +119,10 @@ struct LoadImageView_Preview {
     let store: Store<LoadImageReducer.State, LoadImageReducer.Action> = .init(
         initialState: .failure
     ) {
-        LoadImageReducer()
+        LoadImageReducer(
+            networkMonitor: MockNetworkMonitor(initiallyConnected: true, becomesConnected: false, after: 1),
+            fetchImageUseCase: MockFetchImageUseCase()
+        )
     }
     return LoadImageView(store: store)
 }

@@ -14,10 +14,10 @@ struct LoadingScreen: View {
     var body: some View {
         switch flow.state {
         case .loading(let isConnected):
-            VStack(spacing: 24) {
+            VStack(spacing: Constants.verticalSpacing) {
                 Spacer()
                 if !isConnected {
-                    Text("No Connection")
+                    Text(Strings.noConnection)
                         .foregroundColor(colorScheme == .dark ? .white : .black)
                 }
                 loadingIndicator
@@ -38,10 +38,29 @@ struct LoadingScreen: View {
     
     var loadingIndicator: some View {
         ProgressView()
-            .scaleEffect(2)
+            .scaleEffect(Constants.loaderScale)
     }
 }
+
+// MARK: - Constants
+
+extension LoadingScreen {
+    enum Strings {
+        static let noConnection = "No Connection"
+    }
+    
+    enum Constants {
+        static let loaderScale: CGFloat = 2
+        static let verticalSpacing: CGFloat = 12
+    }
+}
+
+#if DEBUG
+
+// MARK: Previews
 
 #Preview {
     LoadingScreen(flow: Flow())
 }
+
+#endif

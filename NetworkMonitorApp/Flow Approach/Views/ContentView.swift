@@ -16,6 +16,12 @@ struct ContentView: View {
     }
 }
 
+#if DEBUG
+
+// MARK: Previews
+
 #Preview {
     ContentView()
 }
+
+#endif

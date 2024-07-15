@@ -25,7 +25,7 @@ class NetworkOperationPerformerTests: XCTestCase {
     func testPerform_WhenInitiallyConnected_ShouldCallClosure() async throws {
         // Given
         mockNetworkMonitor = MockNetworkMonitor(initiallyConnected: true, becomesConnected: true)
-        sut = await NetworkOperationPerformer(networkMonitor: mockNetworkMonitor)
+        sut = NetworkOperationPerformer(networkMonitor: mockNetworkMonitor)
         let expectation = XCTestExpectation(description: "Closure called")
         
         // Then
@@ -40,7 +40,7 @@ class NetworkOperationPerformerTests: XCTestCase {
     func testPerform_WhenInitiallyDisconnectedAndBecomesConnected_ShouldCallClosure() async throws {
         // Given
         let mockNetworkMonitor = MockNetworkMonitor(initiallyConnected: false, becomesConnected: true)
-        sut = await NetworkOperationPerformer(networkMonitor: mockNetworkMonitor)
+        sut = NetworkOperationPerformer(networkMonitor: mockNetworkMonitor)
         let expectation = XCTestExpectation(description: "Closure called")
         
         // Then
@@ -56,13 +56,12 @@ class NetworkOperationPerformerTests: XCTestCase {
     func testPerform_WhenInitiallyDisconnectedAndRemainsDisconnected_ShouldNotCallClosure() async throws {
         // Given
         mockNetworkMonitor = MockNetworkMonitor(initiallyConnected: false, becomesConnected: false)
-        sut = await NetworkOperationPerformer(networkMonitor: mockNetworkMonitor)
+        sut = NetworkOperationPerformer(networkMonitor: mockNetworkMonitor)
         let expectation = XCTestExpectation(description: "Closure called")
         expectation.isInverted = true
         
         // Then
         let result = await sut.perform(withinSeconds: 2) {
-            print("Closure executed")
             expectation.fulfill()
             return "Result"
         }
@@ -74,7 +73,7 @@ class NetworkOperationPerformerTests: XCTestCase {
     func testPerform_WhenInitiallyDisconnectedAndBecomesConnectedButCancelledBefore_ShouldNotCallClosure() async throws {
         // Given
         mockNetworkMonitor = MockNetworkMonitor(initiallyConnected: false, becomesConnected: true, after: 2)
-        sut = await NetworkOperationPerformer(networkMonitor: mockNetworkMonitor)
+        sut = NetworkOperationPerformer(networkMonitor: mockNetworkMonitor)
         let expectation = XCTestExpectation(description: "Closure called")
         expectation.isInverted = true
         
@@ -91,8 +90,7 @@ class NetworkOperationPerformerTests: XCTestCase {
         let cancelTask = Task {
             let nanoseconds = UInt64(0.5 * 1_000_000_000) // 1 second delay
             try? await Task.sleep(nanoseconds: nanoseconds)
-            print("Cancelling")
-            await sut.cancel()
+            sut.cancel()
         }
         
         
@@ -107,18 +105,16 @@ class NetworkOperationPerformerTests: XCTestCase {
     func testPerform_WhenInitiallyConnectedButCancelledBefore_ShouldNotCallClosure() async throws {
         // Given
         mockNetworkMonitor = MockNetworkMonitor(initiallyConnected: true, becomesConnected: true, after: 2)
-        sut = await NetworkOperationPerformer(networkMonitor: mockNetworkMonitor)
+        sut = NetworkOperationPerformer(networkMonitor: mockNetworkMonitor)
         let expectation = XCTestExpectation(description: "Closure called")
         expectation.isInverted = true
         
         // When
         let performTask = Task {
             return await sut.perform(withinSeconds: 3) {
-                print("Task started")
                 let nanoseconds = UInt64(5 * 1_000_000_000)
                 try? await Task.sleep(nanoseconds: nanoseconds)
                 guard !Task.isCancelled else { return "" }
-                print("Task finished")
                 expectation.fulfill()
                 return "Result"
             }
@@ -127,8 +123,7 @@ class NetworkOperationPerformerTests: XCTestCase {
         let cancelTask = Task {
             let nanoseconds = UInt64(0.5 * 1_000_000_000) // 1 second delay
             try? await Task.sleep(nanoseconds: nanoseconds)
-            print("Cancelling")
-            await sut.cancel()
+            sut.cancel()
         }
         
         

@@ -13,8 +13,8 @@ struct ErrorScreen: View {
 
     var body: some View {
         VStack {
-            Text("Connection is not available")
-            Button("Retry") {
+            Text(Strings.errorMessage)
+            Button(Strings.retry) {
                 flow.loadData()
             }
         }
@@ -22,6 +22,21 @@ struct ErrorScreen: View {
     }
 }
 
+// MARK: - Constants
+
+extension ErrorScreen {
+    enum Strings {
+        static let retry = "Retry"
+        static let errorMessage = "Image could not be loaded"
+    }
+}
+
+#if DEBUG
+
+// MARK: Previews
+
 #Preview {
     ErrorScreen(flow: Flow())
 }
+
+#endif

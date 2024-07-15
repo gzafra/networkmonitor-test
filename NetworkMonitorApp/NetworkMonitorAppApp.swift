@@ -15,7 +15,10 @@ struct NetworkMonitorAppApp: App {
                 store: .init(
                     initialState: .init(networkState: .ready)
                 ) {
-                    LoadImageReducer()
+                    LoadImageReducer(
+                        networkMonitor: MockNetworkMonitor(initiallyConnected: true, becomesConnected: false, after: 1),
+                        fetchImageUseCase: FetchImageUseCase(imageRequest: ImageRequest())
+                    )
                 }
             )
         }

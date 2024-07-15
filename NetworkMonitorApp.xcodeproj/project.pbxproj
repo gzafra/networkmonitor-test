@@ -25,6 +25,12 @@
 		B6E18BA22C415E68004960AD /* LoadImageReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E18BA12C415E68004960AD /* LoadImageReducer.swift */; };
 		B6E18BA42C416001004960AD /* NetworkState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E18BA32C416001004960AD /* NetworkState.swift */; };
 		B6E18BA62C416564004960AD /* LoadImage+Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E18BA52C416564004960AD /* LoadImage+Mocks.swift */; };
+		B6E18BAC2C453304004960AD /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = B6E18BAB2C453304004960AD /* README.md */; };
+		B6E18BB02C4535CE004960AD /* LoadImageViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E18BAF2C4535CE004960AD /* LoadImageViewTests.swift */; };
+		B6E18BB32C453FCA004960AD /* FetchImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E18BB22C453FCA004960AD /* FetchImageUseCase.swift */; };
+		B6E18BB52C45417B004960AD /* MockFetchImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E18BB42C45417B004960AD /* MockFetchImageUseCase.swift */; };
+		B6E18BB72C454831004960AD /* ImageDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E18BB62C454831004960AD /* ImageDataModel.swift */; };
+		B6E18BBA2C454A2B004960AD /* Image+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E18BB92C454A2B004960AD /* Image+Data.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +63,12 @@
 		B6E18BA12C415E68004960AD /* LoadImageReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadImageReducer.swift; sourceTree = "<group>"; };
 		B6E18BA32C416001004960AD /* NetworkState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkState.swift; sourceTree = "<group>"; };
 		B6E18BA52C416564004960AD /* LoadImage+Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoadImage+Mocks.swift"; sourceTree = "<group>"; };
+		B6E18BAB2C453304004960AD /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
+		B6E18BAF2C4535CE004960AD /* LoadImageViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadImageViewTests.swift; sourceTree = "<group>"; };
+		B6E18BB22C453FCA004960AD /* FetchImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchImageUseCase.swift; sourceTree = "<group>"; };
+		B6E18BB42C45417B004960AD /* MockFetchImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFetchImageUseCase.swift; sourceTree = "<group>"; };
+		B6E18BB62C454831004960AD /* ImageDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDataModel.swift; sourceTree = "<group>"; };
+		B6E18BB92C454A2B004960AD /* Image+Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Data.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,12 +111,13 @@
 		B6E18B632C3FCD80004960AD /* NetworkMonitorApp */ = {
 			isa = PBXGroup;
 			children = (
+				B6E18BAB2C453304004960AD /* README.md */,
+				B6E18BAE2C453566004960AD /* Flow Approach */,
+				B6E18BAD2C453545004960AD /* TCA Approach */,
 				B6E18BA92C44F9EA004960AD /* Common */,
-				B6E18B9D2C415E23004960AD /* Features */,
 				B6E18B952C41415E004960AD /* Mocks */,
+				B6E18BB12C453FB3004960AD /* Use Cases */,
 				B6E18B922C4135F4004960AD /* Data */,
-				B6E18B892C413212004960AD /* Flows */,
-				B6E18B882C41320E004960AD /* Views */,
 				B6E18B642C3FCD80004960AD /* NetworkMonitorAppApp.swift */,
 				B6E18B682C3FCD84004960AD /* Assets.xcassets */,
 				B6E18B6A2C3FCD84004960AD /* Preview Content */,
@@ -124,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				B6E18B7C2C3FEDB9004960AD /* NetworkOperationPerformerTests.swift */,
+				B6E18BAF2C4535CE004960AD /* LoadImageViewTests.swift */,
 			);
 			path = NetworkMonitorAppTests;
 			sourceTree = "<group>";
@@ -151,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				B6E18B932C4135FE004960AD /* ImageRequest.swift */,
+				B6E18BB62C454831004960AD /* ImageDataModel.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -159,16 +174,9 @@
 			isa = PBXGroup;
 			children = (
 				B6E18B962C41416C004960AD /* MockNetworkMonitor.swift */,
+				B6E18BB42C45417B004960AD /* MockFetchImageUseCase.swift */,
 			);
 			path = Mocks;
-			sourceTree = "<group>";
-		};
-		B6E18B9D2C415E23004960AD /* Features */ = {
-			isa = PBXGroup;
-			children = (
-				B6E18B9E2C415E2B004960AD /* LoadImageView */,
-			);
-			path = Features;
 			sourceTree = "<group>";
 		};
 		B6E18B9E2C415E2B004960AD /* LoadImageView */ = {
@@ -185,6 +193,7 @@
 		B6E18BA92C44F9EA004960AD /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				B6E18BB82C454A21004960AD /* Extensions */,
 				B6E18BAA2C44F9EF004960AD /* Network */,
 			);
 			path = Common;
@@ -197,6 +206,39 @@
 				B6E18B742C3FCE0A004960AD /* NetworkOperationPerformer.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		B6E18BAD2C453545004960AD /* TCA Approach */ = {
+			isa = PBXGroup;
+			children = (
+				B6E18B9E2C415E2B004960AD /* LoadImageView */,
+			);
+			path = "TCA Approach";
+			sourceTree = "<group>";
+		};
+		B6E18BAE2C453566004960AD /* Flow Approach */ = {
+			isa = PBXGroup;
+			children = (
+				B6E18B892C413212004960AD /* Flows */,
+				B6E18B882C41320E004960AD /* Views */,
+			);
+			path = "Flow Approach";
+			sourceTree = "<group>";
+		};
+		B6E18BB12C453FB3004960AD /* Use Cases */ = {
+			isa = PBXGroup;
+			children = (
+				B6E18BB22C453FCA004960AD /* FetchImageUseCase.swift */,
+			);
+			path = "Use Cases";
+			sourceTree = "<group>";
+		};
+		B6E18BB82C454A21004960AD /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B6E18BB92C454A2B004960AD /* Image+Data.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -286,6 +328,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6E18BAC2C453304004960AD /* README.md in Resources */,
 				B6E18B6C2C3FCD84004960AD /* Preview Assets.xcassets in Resources */,
 				B6E18B692C3FCD84004960AD /* Assets.xcassets in Resources */,
 			);
@@ -308,15 +351,19 @@
 				B6E18BA42C416001004960AD /* NetworkState.swift in Sources */,
 				B6E18B672C3FCD80004960AD /* ContentView.swift in Sources */,
 				B6E18B732C3FCD8D004960AD /* NetworkMonitor.swift in Sources */,
+				B6E18BB32C453FCA004960AD /* FetchImageUseCase.swift in Sources */,
 				B6E18BA02C415E4E004960AD /* LoadImageView.swift in Sources */,
 				B6E18B8D2C4132AF004960AD /* LoadingScreen.swift in Sources */,
+				B6E18BB52C45417B004960AD /* MockFetchImageUseCase.swift in Sources */,
 				B6E18B8B2C413225004960AD /* MainFlow.swift in Sources */,
 				B6E18B912C4132D4004960AD /* ResultScreen.swift in Sources */,
 				B6E18B652C3FCD80004960AD /* NetworkMonitorAppApp.swift in Sources */,
 				B6E18B752C3FCE0A004960AD /* NetworkOperationPerformer.swift in Sources */,
 				B6E18BA62C416564004960AD /* LoadImage+Mocks.swift in Sources */,
 				B6E18B942C4135FE004960AD /* ImageRequest.swift in Sources */,
+				B6E18BB72C454831004960AD /* ImageDataModel.swift in Sources */,
 				B6E18BA22C415E68004960AD /* LoadImageReducer.swift in Sources */,
+				B6E18BBA2C454A2B004960AD /* Image+Data.swift in Sources */,
 				B6E18B8F2C4132C0004960AD /* ErrorScreen.swift in Sources */,
 				B6E18B972C41416C004960AD /* MockNetworkMonitor.swift in Sources */,
 			);
@@ -326,6 +373,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6E18BB02C4535CE004960AD /* LoadImageViewTests.swift in Sources */,
 				B6E18B7D2C3FEDB9004960AD /* NetworkOperationPerformerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

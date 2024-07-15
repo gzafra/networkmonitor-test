@@ -9,10 +9,10 @@ import SwiftUI
 
 struct ResultScreen: View {
     @Environment(\.colorScheme) var colorScheme
-    var image: Image
+    var image: Image?
 
     var body: some View {
-        image
+        image?
             .resizable()
             .scaledToFit()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -21,6 +21,13 @@ struct ResultScreen: View {
     }
 }
 
+
+#if DEBUG
+
+// MARK: Previews
+
 #Preview {
     ResultScreen(image: Image(""))
 }
+
+#endif
