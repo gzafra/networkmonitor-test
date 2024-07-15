@@ -15,6 +15,9 @@ public class NetworkOperationPerformer<SomeType> {
     private var task: Task<SomeType, Never>?
     private var timeoutTask: Task<Void, Never>?
     
+    
+    /// Initializes a new instance of `NetworkOperationPerformer`.
+    /// - Parameter networkMonitor: The network monitor to use for checking the network status. Defaults to `NetworkMonitor()`.
     init(networkMonitor: any NetworkMonitorProtocol = NetworkMonitor()) {
         self.networkMonitor = networkMonitor
         self.cancellable = networkMonitor.isConnectedPublisher.sink { [weak self] (isConnected: Bool) in
@@ -34,6 +37,11 @@ public class NetworkOperationPerformer<SomeType> {
         cancellable?.cancel()
     }
 
+    /// Performs the network operation.
+    /// - Parameters:
+    ///   - timeoutDuration: The time interval within which the operation should be performed.
+    ///   - closure: The closure to execute when the network is connected.
+    /// - Returns: The result of the operation if successful, `nil` otherwise.
     @MainActor
     public func perform(
         withinSeconds timeoutDuration: TimeInterval,
@@ -65,6 +73,7 @@ public class NetworkOperationPerformer<SomeType> {
         await self.timeoutTask?.value        
     }
     
+    /// Cancels the network operation.
     public func cancel() {
         print("Task cancelled")
         timeoutTask?.cancel()

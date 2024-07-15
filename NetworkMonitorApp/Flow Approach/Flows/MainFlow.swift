@@ -17,18 +17,20 @@ enum FlowState {
 
 @MainActor
 class Flow: ObservableObject {
-    private enum Constants {
-        static let imageUrl = "https://fastly.picsum.photos/id/4/5000/3333.jpg?hmac=ghf06FdmgiD0-G4c9DdNM8RnBIN7BO0-ZGEw47khHP4"
-    }
     @Published var state: FlowState = .loading(isConnected: true)
     @Published var image: Image? = nil
+    
     private let operationPerformer = NetworkOperationPerformer<Result<ImageDataModel, Error>?>()
-    private let imageTask = ImageRequest()
-    private let networkMonitor = MockNetworkMonitor(initiallyConnected: true, becomesConnected: false, after: 1) // Mock just for testing purposes
     private var cancellables = Set<AnyCancellable>()
     
-    init() {
-        networkMonitor.isConnectedPublisher
+    private let fetchImageUseCase: any FetchImageUseCaseProtocol
+    private let networkMonitor: any NetworkMonitorProtocol
+    
+    init(fetchImageUseCase: any FetchImageUseCaseProtocol,
+         networkMonitor: any NetworkMonitorProtocol) {
+        self.fetchImageUseCase = fetchImageUseCase
+        self.networkMonitor = networkMonitor
+        self.networkMonitor.isConnectedPublisher
             .sink { [weak self] isConnected in
                 self?.state = .loading(isConnected: isConnected)
             }
@@ -39,7 +41,7 @@ class Flow: ObservableObject {
         state = .loading(isConnected: networkMonitor.isConnected)
         Task {
             let result = await operationPerformer.perform(withinSeconds: 3) { [weak self] in
-                return await self?.imageTask.getImageFrom(urlString: Constants.imageUrl)
+                return await self?.fetchImageUseCase.getImage()
             }
             switch result {
             case .success(let model):

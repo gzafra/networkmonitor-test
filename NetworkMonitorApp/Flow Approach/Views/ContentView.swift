@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var flow = Flow()
+    @EnvironmentObject var flow: Flow
     
     var body: some View {
-        LoadingScreen(flow: flow)
+        LoadingScreen()
+            .environmentObject(flow)
             .onAppear(perform: flow.loadData)
     }
 }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LoadingScreen: View {
-    @ObservedObject var flow: Flow
+    @EnvironmentObject var flow: Flow
     @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
@@ -29,10 +29,12 @@ struct LoadingScreen: View {
             if let image = flow.image {
                 ResultScreen(image: image)
             } else {
-                ErrorScreen(flow: flow)
+                ErrorScreen()
+                    .environmentObject(flow)
             }
         case .error:
-            ErrorScreen(flow: flow)
+            ErrorScreen(
+            ).environmentObject(flow)
         }
     }
     
@@ -60,7 +62,8 @@ extension LoadingScreen {
 // MARK: Previews
 
 #Preview {
-    LoadingScreen(flow: Flow())
+    LoadingScreen()
+        .environmentObject(Flow.mock)
 }
 
 #endif

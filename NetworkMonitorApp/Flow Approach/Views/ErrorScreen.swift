@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct ErrorScreen: View {
+    @EnvironmentObject var flow: Flow
     @Environment(\.colorScheme) var colorScheme
-    @ObservedObject var flow: Flow
 
     var body: some View {
         VStack {
@@ -36,7 +36,8 @@ extension ErrorScreen {
 // MARK: Previews
 
 #Preview {
-    ErrorScreen(flow: Flow())
+    ErrorScreen()
+        .environmentObject(Flow.mock)
 }
 
 #endif
