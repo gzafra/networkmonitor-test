@@ -23,7 +23,6 @@ public class NetworkOperationPerformer<SomeType> {
         self.cancellable = networkMonitor.isConnectedPublisher.sink { [weak self] (isConnected: Bool) in
             if isConnected {
                 guard let self, let closure = self.closure else { return }
-                print("Becomes connected")
                 self.timeoutTask?.cancel()
                 self.task = Task {
                     let result = await closure()
@@ -49,16 +48,13 @@ public class NetworkOperationPerformer<SomeType> {
     ) async -> SomeType? {
         self.closure = closure
         if self.networkMonitor.isConnected {
-            print("Initially connected")
             self.task = Task {
                 let result = await closure()
                 return result
             }
         } else {
-            print("Initially not connected")
             await setTimeout(after: timeoutDuration)
         }
-        print("Actually executing task")
         return await self.task?.value
     }
     
@@ -66,16 +62,13 @@ public class NetworkOperationPerformer<SomeType> {
     private func setTimeout(after timeoutDuration: TimeInterval) async {
         let nanoseconds = UInt64(timeoutDuration * 1_000_000_000)
         self.timeoutTask = Task {
-            print("Started timing out")
             try? await Task.sleep(nanoseconds: nanoseconds)
-            print("Timed out")
         }
         await self.timeoutTask?.value        
     }
     
     /// Cancels the network operation.
     public func cancel() {
-        print("Task cancelled")
         timeoutTask?.cancel()
         task?.cancel()
     }

@@ -9,6 +9,9 @@ import SwiftUI
 
 @main
 struct NetworkMonitorAppApp: App {
+    let networkMonitor = NetworkMonitor()
+    let fetchImageUseCase = FetchImageUseCase(imageRequest: ImageRequest())
+    
     var body: some Scene {
         WindowGroup {
             LoadImageView(
@@ -16,8 +19,8 @@ struct NetworkMonitorAppApp: App {
                     initialState: .init(networkState: .ready)
                 ) {
                     LoadImageReducer(
-                        networkMonitor: MockNetworkMonitor(initiallyConnected: true, becomesConnected: false, after: 1),
-                        fetchImageUseCase: FetchImageUseCase(imageRequest: ImageRequest())
+                        networkMonitor: networkMonitor,
+                        fetchImageUseCase: fetchImageUseCase
                     )
                 }
             )
