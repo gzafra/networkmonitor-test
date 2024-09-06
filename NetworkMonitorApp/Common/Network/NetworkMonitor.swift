@@ -20,6 +20,10 @@ class NetworkMonitor: NetworkMonitorProtocol {
     private let queue = DispatchQueue(label: "Monitor")
     
     @Published var isConnected = false
+    
+    deinit {
+        monitor.cancel()
+    }
 
     public var isConnectedPublisher: AnyPublisher<Bool, Never> {
         $isConnected.eraseToAnyPublisher()
